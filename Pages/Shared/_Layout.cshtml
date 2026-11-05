@@ -1,0 +1,26 @@
+@inject AresQA.Services.BugModeContext BugMode
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>@ViewData["Title"] · Ares</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body data-ares-mode-revision="@BugMode.Revision" data-ares-bugs-enabled="@(BugMode.Enabled ? "true" : "false")">
+@{ var visualLogout = ViewData["VisualLogout"] as bool? == true; }
+<header class="topbar @(BugMode.Enabled ? "bug-mode-on" : "")"><a class="brand" href="/">A<span>R</span> <b>Ares</b></a><span class="environment">LABORATORIO LOCAL</span>
+@if (!visualLogout) { <nav><a href="/">Personas</a><a href="/Empresas">Empresas</a><a href="/Solicitudes">Solicitudes</a>@if (User.IsInRole("Administrador")) { <a href="/Usuarios">Usuarios</a>@if (BugMode.Available) { <a href="/Configuraciones">Configuraciones</a> } }<a href="/swagger">API / Swagger</a></nav> }
+@if (BugMode.Enabled) {
+<div class="bug-mode-indicator" role="status" aria-live="polite">⚠ Bugs intencionales: <strong>ON</strong></div>
+}
+@if (User.Identity?.IsAuthenticated == true && !visualLogout) {
+<div class="session"><span>@User.Identity.Name <small>@(User.IsInRole("Administrador") ? "Administrador" : "Operador")</small></span><form method="post" asp-page="/Logout"><input type="hidden" name="__AresModeRevision" value="@BugMode.Revision" /><button class="btn btn-outline-light btn-sm">Cerrar sesión</button></form></div>
+}
+</header>
+<main class="shell">@RenderBody()</main>
+<footer class="foot">Ares <span>Entrega 02 · Personas, empresas y solicitudes · Datos ficticios</span></footer>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/bug-mode.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body></html>

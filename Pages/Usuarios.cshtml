@@ -1,0 +1,15 @@
+@page
+@model UsuariosModel
+@{ ViewData["Title"] = "Usuarios"; }
+<div class="eyebrow">ADMINISTRACIÓN / USUARIOS</div><section class="page-heading"><div><h1>Usuarios</h1><p>Cuentas del sistema, ordenadas de la más nueva a la más antigua.</p></div><button id="new-user" class="btn btn-primary">+ Nuevo usuario</button></section>
+<div id="notice" role="status" aria-live="polite"></div><section class="panel"><div class="table-responsive"><table class="table"><thead><tr><th>Código</th><th>Correo</th><th>Rol</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+<dialog id="user-editor" aria-labelledby="user-title"><form id="user-form"><div class="dialog-heading"><h2 id="user-title">Nuevo usuario</h2><button id="close-user" type="button" class="btn-close" aria-label="Cerrar"></button></div>
+<div id="user-error" role="alert" class="text-danger"></div>
+<label for="email">Correo electrónico *</label><input id="email" name="email" type="email" class="form-control" required maxlength="120" autocomplete="off" />
+<label for="password" class="mt-3">Contraseña inicial *</label><input id="password" name="password" type="password" class="form-control" required minlength="8" maxlength="100" autocomplete="new-password" />
+<p class="hint">Mínimo 8 caracteres, con mayúscula, minúscula, número y símbolo.</p>
+<label for="rol">Rol *</label><select id="rol" name="rol" class="form-select" required><option value="Operador">Operador</option><option value="Administrador">Administrador (admin)</option></select>
+<div class="dialog-actions"><button id="cancel-user" type="button" class="btn btn-light">Cancelar</button><button id="save-user" class="btn btn-primary">Crear usuario</button></div>
+</form></dialog>
+@section Scripts { <script src="~/js/lab.js" asp-append-version="true"></script><script src="~/js/usuarios.js" asp-append-version="true"></script> }
+

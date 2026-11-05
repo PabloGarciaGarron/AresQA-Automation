@@ -1,0 +1,8 @@
+cd 'C:\00. BORRAR\Aplicacion BBV\AresQA\tests\Playwright'
+
+npm.cmd test
+npm.cmd run report
+
+npm.cmd run test:visible -- --grep AUT-003
+npm.cmd test -- --project=chromium
+npm.cmd test -- --project=firefox
