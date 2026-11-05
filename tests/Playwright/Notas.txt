@@ -1,7 +1,8 @@
 cd 'C:\00. BORRAR\Aplicacion BBV\AresQA\tests\Playwright'
 
-npm.cmd test
-npm.cmd run report
+npm.cmd test          # Ejecutar los 11 casos
+npm.cmd run test:e2e  # Ejecutar solo el E2E
+npm.cmd run report    # Abrir el reporte común
 
 npm.cmd run test:visible -- --grep AUT-003
 npm.cmd test -- --project=chromium

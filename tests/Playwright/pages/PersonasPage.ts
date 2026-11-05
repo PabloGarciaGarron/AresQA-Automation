@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { DatosPersona } from '../helpers/datos';
+import { PersonaCreada } from '../helpers/datos-e2e';
 import { BasePage } from './BasePage';
 
 export class PersonasPage extends BasePage {
@@ -11,6 +12,7 @@ export class PersonasPage extends BasePage {
   readonly inputApellidos: Locator;
   readonly inputCorreo: Locator;
   readonly inputTelefono: Locator;
+  readonly selectorEmpresa: Locator;
   readonly botonGuardar: Locator;
   readonly botonCancelar: Locator;
   readonly mensaje: Locator;
@@ -37,6 +39,7 @@ export class PersonasPage extends BasePage {
     this.inputApellidos = page.locator('#apellidos');
     this.inputCorreo = page.locator('#correo');
     this.inputTelefono = page.locator('#telefono');
+    this.selectorEmpresa = page.locator('#empresaId');
     this.botonGuardar = page.locator('#save');
     this.botonCancelar = page.locator('#cancel-editor');
     this.mensaje = page.locator('#notice');
@@ -85,13 +88,19 @@ export class PersonasPage extends BasePage {
     await expect(this.editor).not.toBeVisible();
   }
 
-  async registrar(datos: DatosPersona): Promise<void> {
+  async registrar(datos: DatosPersona, empresaId?: number): Promise<PersonaCreada> {
     await this.nuevaPersona();
     await this.completarFormulario(datos);
-    await this.guardar();
+    if (empresaId !== undefined) await this.selectorEmpresa.selectOption(String(empresaId));
+    const [respuesta] = await Promise.all([
+      this.page.waitForResponse(r => new URL(r.url()).pathname === '/api/personas' && r.request().method() === 'POST'),
+      this.guardar(),
+    ]);
+    expect(respuesta.status(), await respuesta.text()).toBe(201);
     await expect(this.editor).not.toBeVisible();
     await expect(this.mensaje).toHaveText('Persona registrada correctamente.');
     await this.buscar(datos.documento);
+    return respuesta.json();
   }
 
   filaPorDocumento(documento: string): Locator {

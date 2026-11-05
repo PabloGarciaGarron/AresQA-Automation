@@ -1,3 +1,6 @@
 node_modules/
 playwright-report/
 test-results/
+
+playwright-report-e2e/
+test-results-e2e/

@@ -5,6 +5,7 @@
   "scripts": {
     "test": "playwright test",
     "test:visible": "playwright test --headed",
+    "test:e2e": "playwright test --grep E2E-001",
     "report": "playwright show-report playwright-report",
     "typecheck": "tsc --noEmit"
   },
