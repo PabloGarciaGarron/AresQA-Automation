@@ -2,11 +2,13 @@ import { test as base, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { PersonasPage } from '../pages/PersonasPage';
 import { SolicitudesPage } from '../pages/SolicitudesPage';
+import { EmpresasPage } from '../pages/EmpresasPage';
 
 type Paginas = {
   loginPage: LoginPage;
   personasPage: PersonasPage;
   solicitudesPage: SolicitudesPage;
+  empresasPage: EmpresasPage;
   registrarEntorno: void;
 };
 
@@ -26,6 +28,7 @@ export const test = base.extend<Paginas>({
   loginPage: async ({ page }, usar) => { await usar(new LoginPage(page)); },
   personasPage: async ({ page }, usar) => { await usar(new PersonasPage(page)); },
   solicitudesPage: async ({ page }, usar) => { await usar(new SolicitudesPage(page)); },
+  empresasPage: async ({ page }, usar) => { await usar(new EmpresasPage(page)); },
 });
 
 export { expect };
