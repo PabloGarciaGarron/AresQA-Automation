@@ -39,8 +39,33 @@ test.describe("API tests", () => {
         empresaId: null,
       },
     });
-
     await logApi(response, "POST");
     expect(response.status()).toBe(409);
+    const body = await response.json();
+    expect(body.message).toBe("Ya existe una persona con ese documento.");
+  });
+
+  test("API-TC-012", async ({ request }) => {
+    //POST empresa con NIT duplicado responde 409
+    const loginResponse = await iniciarSesionApi(request, "admin");
+    await expect(loginResponse).toBeOK();
+    const csrfToken = await obtenerTokenCSRF(request);
+    const response = await request.post("/api/empresas", {
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken,
+      },
+      data: {
+        nit: "333444000",
+        nombre: "Burguer King",
+        correo: "Robbert@king.com",
+        direccion: "Las Retamas #456",
+        telefono: "12345678",
+      },
+    });
+    await logApi(response, "POST");
+    expect(response.status()).toBe(409);
+    const body = await response.json();
+    expect(body.message).toBe("Ya existe una empresa con ese NIT.");
   });
 });
