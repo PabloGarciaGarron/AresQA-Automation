@@ -20,6 +20,47 @@ test.describe("API tests", () => {
     expect(response.status()).toBe(200);
   });
 
+  test("API-TC-001", async ({ request }) => {
+    //login con contraseña incorrecta responde 401
+    const csrfToken = await obtenerTokenCSRF(request);
+    const response = await request.post("/api/auth/login", {
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken,
+      },
+      data: {
+        email: CUENTAS.admin.correo,
+        password: "incorrecta",
+      },
+    });
+    await logApi(response, "POST");
+    expect(response.status()).toBe(401);
+    const body = await response.json();
+    expect(body.message).toBe(
+      "Credenciales incorrectas o cuenta temporalmente bloqueada.",
+    );
+  });
+
+  test("API-TC-004", async ({ request }) => {
+    //POST crear usuario como Operador responde 403
+    const loginResponse = await iniciarSesionApi(request, "operador");
+    await expect(loginResponse).toBeOK();
+    const csrfToken = await obtenerTokenCSRF(request);
+    const response = await request.post("/api/usuarios", {
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken,
+      },
+      data: {
+        email: "nuevo.operador@example.test",
+        password: "PasswordQA123!",
+        rol: "Operador",
+      },
+    });
+    await logApi(response, "POST");
+    expect(response.status()).toBe(403);
+  });
+
   test("API-TC-005", async ({ request }) => {
     //POST persona duplicada responde 409
     const loginResponse = await iniciarSesionApi(request, "admin");
@@ -68,26 +109,5 @@ test.describe("API tests", () => {
     expect(response.status()).toBe(409);
     const body = await response.json();
     expect(body.message).toBe("Ya existe una empresa con ese NIT.");
-  });
-
-  test("API-TC-001", async ({ request }) => {
-    //login con contraseña incorrecta responde 401
-    const csrfToken = await obtenerTokenCSRF(request);
-    const response = await request.post("/api/auth/login", {
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-TOKEN": csrfToken,
-      },
-      data: {
-        email: CUENTAS.admin.correo,
-        password: "incorrecta",
-      },
-    });
-    await logApi(response, "POST");
-    expect(response.status()).toBe(401);
-    const body = await response.json();
-    expect(body.message).toBe(
-      "Credenciales incorrectas o cuenta temporalmente bloqueada.",
-    );
   });
 });
