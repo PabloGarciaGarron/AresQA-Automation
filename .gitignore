@@ -19,3 +19,8 @@ tests/selenium/reportes/
 tests/selenium/graficos/
 **/__pycache__/
 **/.pytest_cache/
+
+# Playwright API logs
+**/debugLogs.log
+**/infoLogs.log
+**/traceLogs.log
