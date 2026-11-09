@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { iniciarSesionApi, obtenerTokenCSRF } from "../helpers/auth.api";
 import { estadoSesion } from "../helpers/api";
 import { logApi } from "../helpers/apiLogger";
+import { CUENTAS } from "../helpers/datos";
 
 test.describe("API tests", () => {
   test("Inicio sesion", async ({ request }) => {
@@ -67,5 +68,26 @@ test.describe("API tests", () => {
     expect(response.status()).toBe(409);
     const body = await response.json();
     expect(body.message).toBe("Ya existe una empresa con ese NIT.");
+  });
+
+  test("API-TC-001", async ({ request }) => {
+    //login con contraseña incorrecta responde 401
+    const csrfToken = await obtenerTokenCSRF(request);
+    const response = await request.post("/api/auth/login", {
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken,
+      },
+      data: {
+        email: CUENTAS.admin.correo,
+        password: "incorrecta",
+      },
+    });
+    await logApi(response, "POST");
+    expect(response.status()).toBe(401);
+    const body = await response.json();
+    expect(body.message).toBe(
+      "Credenciales incorrectas o cuenta temporalmente bloqueada.",
+    );
   });
 });
