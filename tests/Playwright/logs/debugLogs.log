@@ -1,0 +1,154 @@
+[17:30:25.052] INFO:  
+╔════════════════════════════════════════════════════════════╗
+║ API REQUEST                                                ║
+╠════════════════════════════════════════════════════════════╣
+  URL:         (GET) http://localhost:5080/api/personas
+  Status:      200 OK
+  Headers:     {
+                 "content-type": "application/json; charset=utf-8",
+                 "date": "Mon, 09 Nov 2026 21:30:24 GMT",
+                 "server": "Kestrel",
+                 "cache-control": "no-store",
+                 "transfer-encoding": "chunked",
+                 "x-ares-mode": "normal",
+                 "x-ares-mode-revision": "7dbd6cefcd304c6782eef3f49159b557"
+               }
+  Body:        {
+                 "items": [
+                   {
+                     "empresaNombre": null,
+                     "codigo": "PER-0034",
+                     "id": 34,
+                     "activo": true,
+                     "creadoEn": "2026-11-05T04:35:35.8479251",
+                     "empresaId": null,
+                     "documento": "PF-8001B11321CD",
+                     "nombres": "Persona Playwright",
+                     "apellidos": "Prueba QA",
+                     "correo": "pf-8001b11321cd@example.test",
+                     "telefono": "70000000"
+                   },
+                   {
+                     "empresaNombre": null,
+                     "codigo": "PER-0033",
+                     "id": 33,
+                     "activo": true,
+                     "creadoEn": "2026-11-05T04:34:05.745813",
+                     "empresaId": null,
+                     "documento": "PF-24AF6F13B05F",
+                     "nombres": "Persona Playwright",
+                     "apellidos": "Prueba QA",
+                     "correo": "pf-24af6f13b05f@example.test",
+                     "telefono": "70000000"
+                   },
+                   {
+                     "empresaNombre": null,
+                     "codigo": "PER-0032",
+                     "id": 32,
+                     "activo": true,
+                     "creadoEn": "2026-11-05T04:32:12.5308585",
+                     "empresaId": null,
+                     "documento": "PF-493D151DB692",
+                     "nombres": "Persona Playwright",
+                     "apellidos": "Prueba QA",
+                     "correo": "pf-493d151db692@example.test",
+                     "telefono": "70000000"
+                   },
+                   {
+                     "empresaNombre": null,
+                     "codigo": "PER-0031",
+                     "id": 31,
+                     "activo": true,
+                     "creadoEn": "2026-11-05T04:26:34.7972013",
+                     "empresaId": null,
+                     "documento": "PF-F01ED6AC50CF",
+                     "nombres": "Persona Playwright",
+                     "apellidos": "Prueba QA",
+                     "correo": "pf-f01ed6ac50cf@example.test",
+                     "telefono": "70000000"
+                   },
+                   {
+                     "empresaNombre": null,
+                     "codigo": "PER-0030",
+                     "id": 30,
+                     "activo": true,
+                     "creadoEn": "2026-11-05T04:26:01.6360323",
+                     "empresaId": null,
+                     "documento": "PF-F0A3BA767507",
+                     "nombres": "Persona Playwright",
+                     "apellidos": "Prueba QA",
+                     "correo": "pf-f0a3ba767507@example.test",
+                     "telefono": "70000000"
+                   },
+                   {
+                     "empresaNombre": null,
+                     "codigo": "PER-0029",
+                     "id": 29,
+                     "activo": false,
+                     "creadoEn": "2026-11-03T21:28:14.9943936",
+                     "empresaId": null,
+                     "documento": "100200",
+                     "nombres": "Katherine",
+                     "apellidos": "Torricos",
+                     "correo": "katy@gmail.com",
+                     "telefono": "70000000"
+                   },
+                   {
+                     "empresaNombre": null,
+                     "codigo": "PER-0028",
+                     "id": 28,
+                     "activo": true,
+                     "creadoEn": "2026-11-03T21:27:44.1774714",
+                     "empresaId": null,
+                     "documento": "LAB-2001",
+                     "nombres": "Ana Juna",
+                     "apellidos": "Prueba",
+                     "correo": "ana2001@example.test",
+                     "telefono": "70000000"
+                   },
+                   {
+                     "empresaNombre": "Empresa Demo 3",
+                     "codigo": "PER-0027",
+                     "id": 27,
+                     "activo": false,
+                     "creadoEn": "2026-11-03T18:54:04.1316501",
+                     "empresaId": 3,
+                     "documento": "7555195010",
+                     "nombres": "Mauricio Cristian",
+                     "apellidos": "Ruiz",
+                     "correo": "maury@gmail",
+                     "telefono": "43525352"
+                   },
+                   {
+                     "empresaNombre": "Empresa Demo 5",
+                     "codigo": "PER-0026",
+                     "id": 26,
+                     "activo": true,
+                     "creadoEn": "2026-10-26T23:44:16.4480315",
+                     "empresaId": 5,
+                     "documento": "7555195",
+                     "nombres": "Pepito",
+                     "apellidos": "Perez",
+                     "correo": "pepi@gmail.com",
+                     "telefono": "72867672"
+                   },
+                   {
+                     "empresaNombre": null,
+                     "codigo": "PER-0025",
+                     "id": 25,
+                     "activo": false,
+                     "creadoEn": "2026-10-20T00:28:37.4389942",
+                     "empresaId": null,
+                     "documento": "10000025",
+                     "nombres": "Persona 25",
+                     "apellidos": "Demostración",
+                     "correo": "persona25@example.test",
+                     "telefono": "70000000"
+                   }
+                 ],
+                 "total": 34,
+                 "pagina": 1,
+                 "tamano": 10
+               }
+╚════════════════════════════════════════════════════════════╝
+    
