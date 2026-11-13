@@ -1,0 +1,23 @@
+# 1. EMPRESAS (Entidad base independiente)
+k6 run .\tests\testempresa.js
+# 2. PERSONAS (Se asocian a empresas existentes)
+k6 run .\tests\testpersona.js
+# 3. SOLICITUDES (Requiere personas activas con empresa asignada)
+k6 run .\tests\testsolicitud.js
+# 4. USUARIOS (Cuentas administrativas y operadores)
+k6 run .\tests\testusuario.js
+
+
+¿Por qué este orden?
+testempresa.js (Primero):
+
+Las Empresas no dependen de ninguna otra entidad del sistema. Al ejecutarlas primero, garantizas que existan empresas en la base de datos disponibles para los siguientes flujos.
+testpersona.js (Segundo):
+
+En AresQA, una Persona puede asociarse a una empresa (empresaId). Al tener empresas ya creadas, las personas pueden vincularse correctamente.
+testsolicitud.js (Tercero):
+
+Regla estricta del backend: Una solicitud (POST /api/solicitudes) requiere obligatoriamente que la persona seleccionada esté activa y tenga una empresa asignada. Si se ejecutara antes, fallaría con error 400 / 409. Al ejecutarse en tercer lugar, el flujo de solicitudes encuentra datos válidos y fluye sin inconvenientes.
+testusuario.js (Cuarto):
+
+La gestión de usuarios (/api/usuarios) es un módulo administrativo independiente que interactúa con las tablas de ASP.NET Core Identity. Dado que la creación concurrente de usuarios realiza hashing de contraseñas y transacciones en SQLite, es ideal ejecutarla de forma aislada.

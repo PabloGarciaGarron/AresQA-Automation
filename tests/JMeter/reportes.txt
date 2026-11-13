@@ -1,0 +1,4 @@
+cd C:\00. BORRAR\apache-jmeter-5.6.3\bin
+
+
+jmeter.bat -n -t "C:\00. BORRAR\Aplicacion BBV\AresQA\tests\JMeter\Proyecto_ARES.jmx" -l "C:\00. BORRAR\Aplicacion BBV\AresQA\tests\JMeter\resultados.jtl" -e -o "C:\00. BORRAR\Aplicacion BBV\AresQA\tests\JMeter\reporte_html"

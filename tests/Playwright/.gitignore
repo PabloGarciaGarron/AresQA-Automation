@@ -1,0 +1,7 @@
+node_modules/
+historial-reportes/
+playwright-report/
+test-results/
+
+playwright-report-e2e/
+test-results-e2e/
