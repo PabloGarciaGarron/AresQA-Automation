@@ -1,0 +1,26 @@
+bin/
+obj/
+**/bin/
+**/obj/
+Data/*.db*
+app.db*
+node_modules/
+test-results/
+playwright-report/
+work/
+README.md
+bugs_documentation.md
+
+# Entorno y resultados de Selenium
+tests/selenium
+tests/selenium/.venv/
+tests/selenium/capturas/
+tests/selenium/reportes/
+tests/selenium/graficos/
+**/__pycache__/
+**/.pytest_cache/
+
+# Playwright API logs
+**/debugLogs.log
+**/infoLogs.log
+**/traceLogs.log
