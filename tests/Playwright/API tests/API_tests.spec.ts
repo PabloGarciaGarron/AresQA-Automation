@@ -110,4 +110,26 @@ test.describe("API tests", () => {
     const body = await response.json();
     expect(body.message).toBe("Ya existe una empresa con ese NIT.");
   });
+
+  test("API-TC-017", async ({ request }) => {
+    const loginResponse = await iniciarSesionApi(request, "operador");
+    await expect(loginResponse).toBeOK();
+
+    const csrfToken = await obtenerTokenCSRF(request);
+    const response = await request.post("/api/solicitudes", {
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken,
+      },
+      data: {
+        personaId: 35,
+        empresaId: 8,
+        asunto: "Nuevo Diplomado",
+        descripcion: "Coordinacion para el Diplomado QA de la gestion 2027",
+      },
+    });
+
+    await logApi(response, "POST");
+    expect(response.status()).toBe(201);
+  });
 });
